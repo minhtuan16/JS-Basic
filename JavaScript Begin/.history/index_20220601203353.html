@@ -1,0 +1,35 @@
+<!-- <script src="main.js"></script> -->
+<script src="ptb2.js"></script>
+<script>
+    ptb2(5, -2, 1)
+    ptb2(1, -4, 4)
+    try {
+        ptb2(undefined, 4, 4)
+    } catch (e) {
+        console.log(e); 
+    }
+
+    //String 
+    var s = "Hello JavaScript"
+
+    var s1 = s.substr(4, 4); // 4 dau tien la chon vi tri cat, so 4 tiep theo la chon 4 phan tu bat dau tu vi tri cat tinh ca dau khoang cach
+    console.log(s1);
+
+    var s2 = s.substring(4, 12); // 4 dau tien la chon vi tri cat, so 12 tiep theo la diem ket thuc => no se lay tu bao gom tu vi tri cat den vi tri ket thuc - 1
+    console.log(s2);
+
+    var now = new Date();
+
+    //doi tuong
+    var p1 = {
+        id : 1,
+        name : "P1",
+        hi: function() {
+            console.log("Hello " + this.name)
+        }
+    }
+
+    console.log(p1.name);
+    p1.hi()
+</script>
+    

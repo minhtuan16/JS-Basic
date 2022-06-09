@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <input type="text" id="id">
+        <input type="text" id="name">
+        <button id="saveBtn">Save</button>
+    </form>   
+    <table border="1px">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+        </tr>
+
+        <tbody id="tableBody">
+           
+        </tbody>
+    </table>
+
+    <script>
+        var data = [
+            {id:1, name:"P1"}, 
+            {id:2, name:"P2"}, 
+            {id:3, name:"P3"}
+        ]
+
+        function drawTr(person) {
+            var tr = document.createElement("tr");
+            var tdId = document.createElement("td");
+            var tdName = document.createElement("td");
+
+            tdId.innerHTML = person.id;
+            tdName.innerHTML = person.name;
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdName);
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.appendChild(tr);
+        }
+
+        function resetDrawTable(persons) {
+            var tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            for(var i = 0; i < persons.length; i++) {
+                drawTr(persons[i]);
+            }
+        }
+
+        resetDrawTable(data);
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <input type="text" id="id" value="">
+        <input type="text" id="name" value="">
+        <button type="button" id="saveBtn" onclick="create()">Save</button>
+       
+    </form>   
+    <table border="1px">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Action</td>
+        </tr>
+
+        <tbody id="tableBody">
+           
+        </tbody>
+    </table>
+
+    <script>
+        var data = [
+            {id:1, name:"P1"}, 
+            {id:2, name:"P2"}, 
+            {id:3, name:"P3"}
+        ]
+
+        function drawTr(person) {
+            var tr = document.createElement("tr");
+            var tdId = document.createElement("td");
+            var tdName = document.createElement("td");
+            var tdOption = document.createElement("td");
+
+            var delBtn = document.createElement("button");
+            var editBtn = document.createElement("button");
+
+            delBtn.innerText = 'Delete';
+            editBtn.innerText = 'Edit';
+
+            tdOption.appendChild(delBtn); //appendChild la nhet them nut delete vao trong cot
+            tdOption.appendChild(editBtn);
+
+            tdId.innerHTML = person.id;
+            tdName.innerHTML = person.name;
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdName);
+            tr.appendChild(tdOption);
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.appendChild(tr);
+        }
+
+        function resetDrawTable(persons) {
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            for(var i = 0; i < persons.length; i++) {
+                drawTr(persons[i]);
+            }
+        }
+
+        //goi ham in ra toan bo mang
+        // resetDrawTable(data);
+
+        // doc du lieu tu form ben tren
+        function create() {
+            
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+            // var saveInput = document.getElementById("saveBtn");
+
+            var id = idInput.value;
+            var name = nameInput.value;
+
+            var p = {id: id, name: name};
+
+            // data.push(p);
+            var data1 = [];
+            data1.push(p);
+
+            resetDrawTable(data1);
+        }
+
+        function delete(id) {
+            let index = data1.findIndex(p => p.id == id); // loc duoc id
+
+            
+            var newDate = data1.filter(p => p.id != id);
+
+            // for truyen thong de tim ra id
+            // for(var i = 0; i < persons.length; i++) {
+            //     if(persons[i].id == id) {
+            //         //xoa di
+            //     }
+            // }
+        }
+    </script>
+</body>
+</html>

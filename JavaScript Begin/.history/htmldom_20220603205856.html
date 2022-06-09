@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <input type="text" id="id" value="">
+        <input type="text" id="name" value="">
+        <button type="button" id="saveBtn" onclick="create()">Save</button>
+        <button type="button" id="updateBtn" onclick="update()">Update</button>
+    </form>   
+    <table border="1px">
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Action</td>
+        </tr>
+
+        <tbody id="tableBody">
+           
+        </tbody>
+    </table>
+
+    <script>
+        var data = [
+            {id:1, name:"P1"}, 
+            {id:2, name:"P2"}, 
+            {id:3, name:"P3"}
+        ]
+
+        function drawTr(person) {
+            var tr = document.createElement("tr");
+            var tdId = document.createElement("td");
+            var tdName = document.createElement("td");
+            var tdOption = document.createElement("td");
+
+            var delBtn = document.createElement("button");
+            var editBtn = document.createElement("button");
+
+            delBtn.innerText = 'Delete';
+            editBtn.innerText = 'Edit';
+
+            //bat su kien 
+            delBtn.onclick = function() {
+                deletePerson(person.id);
+            }
+
+            editBtn.onclick = function() {
+                editPerson(id);
+            }
+
+            // dung ham nay de bat su kien cung duoc
+            // delBtn.addEventListener("click", function() {
+            //     deletePerson(person.id);
+            // })
+
+            tdOption.appendChild(delBtn); //appendChild la nhet them nut delete vao trong cot
+            tdOption.appendChild(editBtn);
+
+            tdId.innerHTML = person.id;
+            tdName.innerHTML = person.name;
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdName);
+            tr.appendChild(tdOption);
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.appendChild(tr);
+        }
+
+        function resetDrawTable(persons) {
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            for(var i = 0; i < persons.length; i++) {
+                drawTr(persons[i]);
+            }
+        }
+
+        //goi ham in ra toan bo mang
+        // resetDrawTable(data);
+
+        // doc du lieu tu form ben tren
+        function create() {
+            
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+            // var saveInput = document.getElementById("saveBtn");
+
+            var id = idInput.value;
+            var name = nameInput.value;
+
+            var p = {id: id, name: name};
+
+            data.push(p);
+            // var data1 = [];
+            // data1.push(p);
+
+            resetDrawTable(data);
+        }
+
+        function deletePerson(id) {
+            // let index = data1.findIndex(p => p.id == id); // loc duoc id
+            // data1.splice(index, 1);
+
+            // loc ra person co id khac id muon xoa
+            var newData = data.filter(p => p.id != id);
+
+            data = newData;
+            resetDrawTable(data)
+            
+        }
+
+        function editPerson(id) {
+           
+            // tim person co id
+            // cach 1
+            // var newData = data.filter(x => x.id == id)
+
+            // data = newData
+
+            // resetDrawTable(data)
+
+            // cach 2
+            var index = data.findIndex(x => x.id == id);
+            let person = data[index];
+            
+            //day du lieu len form
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+
+            idInput.value = person.id
+            nameInput.value = person.name
+        }
+
+        function update() {
+            
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+            // var saveInput = document.getElementById("saveBtn");
+
+            var id = idInput.value;
+            var name = nameInput.value;
+
+            // xoa thang cu di 
+            var newData = data.filter(p => p.id != id);
+            newData.push({id: id, name: name});
+
+            // luu lai thang moi
+            data = newData
+            // var data1 = [];
+            // data1.push(p);
+
+            resetDrawTable(data);
+        }
+    </script>
+</body>
+</html>
