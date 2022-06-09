@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/search.css">
+    <title>User</title>
+</head>
+<body>
+    
+    <h2>Create user</h2>
+    <!--create a form with the following fiels,email, password, first name, last name, age, address, phone, payment, color-->
+      
+
+    <form id="registerForm" class="container">
+        <h4>User Information</h4>
+        <div class="control">
+            <label>ID:</label>
+            <input class="form-control" id="id" type="text" value="" />
+        </div>
+        
+        <div class="control">
+            <label>Name:</label>
+            <input class="form-control" id="name" type="text" value="" />
+        </div>
+        <div class="control">
+            <label>Age:</label>
+            <input class="form-control" id="age" type="text" value="" />
+        </div>
+        <div class="control">
+            <label>Address:</label>
+            <input class="form-control" id="address" type="text" value="" />
+        </div>
+        
+        <button type="submit" class="btn btn-primary" id="btnSave" onclick="create()">Create</button>
+        
+        <button type="button" class="btn btn-primary" id="btnUpdate" onclick="update()" style="display: none;">Save</button>
+    </form>
+
+    <div class="search-container">
+        <form >
+            <input type="text" placeholder="Search..." name="search">
+            <button type="button"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <table border="1px">
+         
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Address</td>
+            <td>Action</td>
+        </tr>
+    
+        <tbody id="tableBody">
+    
+        </tbody>
+    </table>
+    <!-- <script src="scripts/user.js"></script> -->
+    <script>
+        var data = [
+            {id:1, name:"P1", age: 18, address: "hn"}, 
+            {id:2, name:"P2", age: 20, address: "hn"}, 
+            {id:3, name:"P3", age: 22, address: "hn"}
+        ]
+
+        function drawTr(person) {
+            var tr = document.createElement("tr");
+            var tdId = document.createElement("td");
+            var tdName = document.createElement("td");
+            var tdAge = document.createElement("td");
+            var tdAddress = document.createElement("td");
+            var tdOption = document.createElement("td");
+
+            var delBtn = document.createElement("button");
+            var editBtn = document.createElement("button");
+
+            delBtn.innerText = 'Delete';
+            editBtn.innerText = 'Edit';
+
+            //bat su kien 
+            delBtn.onclick = function() {
+                deletePerson(person.id);
+            }
+
+            editBtn.onclick = function() {
+                editPerson(person.id);
+            }
+
+            // dung ham nay de bat su kien cung duoc
+            // delBtn.addEventListener("click", function() {
+            //     deletePerson(person.id);
+            // })
+
+            tdOption.appendChild(delBtn); //appendChild la nhet them nut delete vao trong cot
+            tdOption.appendChild(editBtn);
+
+            tdId.innerHTML = person.id;
+            tdName.innerHTML = person.name;
+            tdAge.innerHTML = person.age;
+            tdAddress.innerHTML = person.address;
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdName);
+            tr.appendChild(tdAge);
+            tr.appendChild(tdAddress);
+            tr.appendChild(tdOption);
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.appendChild(tr);
+        }
+
+        function resetDrawTable(persons) {
+
+            var tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = "";
+
+            for(var i = 0; i < persons.length; i++) {
+                drawTr(persons[i]);
+            }
+        }
+
+        //goi ham in ra toan bo mang
+        // resetDrawTable(data);
+
+        // doc du lieu tu form ben tren
+        function create() {
+            
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+            var ageInput = document.getElementById("age");
+            var addressInput = document.getElementById("address");
+            // var saveInput = document.getElementById("saveBtn");
+
+            var id = idInput.value;
+            var name = nameInput.value;
+            var age = ageInput.value;
+            var address = addressInput.value;
+
+            var p = {id: id, name: name, age: age, address: address};
+
+            data.push(p);
+            // var data1 = [];
+            // data1.push(p);
+
+            resetDrawTable(data);
+        }
+
+        function deletePerson(id) {
+            // let index = data1.findIndex(p => p.id == id); // loc duoc id
+            // data1.splice(index, 1);
+
+            // loc ra person co id khac id muon xoa
+            var newData = data.filter(p => p.id != id);
+
+            data = newData;
+            resetDrawTable(data)
+            
+        }
+
+        function editPerson(id) {
+           
+            // tim person co id
+            // cach 1
+            // var newData = data.filter(x => x.id == id)
+
+            // data = newData
+
+            // resetDrawTable(data)
+
+            // cach 2
+            var index = data.findIndex(x => x.id == id);
+            let person = data[index];
+            console.log(person)
+            //day du lieu len form
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+            var ageInput = document.getElementById("age");
+            var addressInput = document.getElementById("address");
+
+            idInput.value = person.id
+            nameInput.value = person.name
+            ageInput.value = person.age;
+            addressInput.value = person.address;
+
+            document.getElementById("updateBtn").style.display= 'block';
+            document.getElementById("btnSave").style.display= 'none';
+        }
+
+        function update() {
+            
+            var idInput = document.getElementById("id");
+            var nameInput = document.getElementById("name");
+            var ageInput = document.getElementById("age");
+            var addressInput = document.getElementById("address");
+            // var saveInput = document.getElementById("saveBtn");
+
+            var id = idInput.value;
+            var name = nameInput.value;
+            var age = ageInput.value;
+            var address = addressInput.value;
+
+            // xoa thang cu di 
+            // var newData = data.filter(p => p.id != id);
+            // newData.push({id: id, name: name});
+            // data = newData
+            var index = data.findIndex(x => x.id == id);
+            data[index] = {id, name}
+
+            // luu lai thang moi
+            
+            // var data1 = [];
+            // data1.push(p);
+
+            resetDrawTable(data);
+
+            document.getElementById("updateBtn").style.display= 'none';
+            document.getElementById("saveBtn").style.display= 'block';
+        }
+    </script>
+</body>
+</html>
