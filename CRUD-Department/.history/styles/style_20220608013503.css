@@ -1,0 +1,127 @@
+/* Global */
+.control{
+    width: 50%;
+}
+.error{
+    border: 2px solid red;
+}
+html{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    letter-spacing: 1px;
+}
+h2{
+    text-align: center;
+}
+body{
+    /* background-color: #141E61; */
+    color: #000000;
+}
+/* Nav */
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    background-color: #9498a3;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+}
+
+a:before {
+    content: '';
+    position: absolute;
+    border: #e1e1e1 solid 4px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: top, right, bottom, left;
+    transition-property: top, right, bottom, left;
+}
+
+a:hover:before,
+a:focus:before,
+.a:active:before {
+    top: -8px;
+    right: -8px;
+    bottom: -8px;
+    left: -8px;
+}
+
+/* Index */
+#sign-in {
+    border: #0F044C solid 3px;
+    background-color: #1225ee34;
+    box-shadow: 5px 5px 5px #0F044C;
+    padding-left: 20%;
+    padding-bottom: 20%;
+    width: 20rem;
+    margin-left: 20%;
+    border-radius: 30px;
+}
+
+/* Register */
+.nav-btn {
+    margin-left: 20px;
+    margin-top: 20px
+}
+
+h2 {
+    margin-left: 38%;
+    margin-top: 60px;
+}
+
+#registerForm {
+    border: #0F044C solid 3px;
+    background-color: #8f92b434;
+    box-shadow: 5px 5px 5px #5c5a68;
+    padding-left: 18%;
+    padding-bottom: 2%;
+    width: 50%;
+    margin-left: 45%;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+
+#btnSave {
+    margin-left: 50%;
+    margin-top: 20px;
+}
+
+#btnUpdate {
+    margin-left: 50%;
+    margin-top: 20px;
+}
+
+/* Users */
+table {
+    border: #a0bce7 4px solid;
+    background-color: #8184a734;
+    margin-top: -350px;
+    margin-left: 100px;
+}
+
+/* h1 {
+    margin-top: -450px;
+} */
+table form input {
+    margin-left: 100px;
+}
+
+table td {
+    border: #000000 1px solid;
+    text-align: center;
+    font-weight: 900;
+    padding: 10px;
+}
+
+td {
+    font-weight: 100;
+    border: #e1e1e1 solid 1px;
+    padding: 5px;
+}
